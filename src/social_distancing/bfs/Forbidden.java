@@ -4,10 +4,8 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 
 /**
- * Computes the forbidden-pair matrix: forbidden[u][v] = true
- * if the graph-distance between u and v is ≤ D.
- *
- * This is used to enforce the distancing rule during alternating BFS.
+ * Precomputes which vertex pairs violate the distance constraint.
+ * forbidden[u][v] is true iff dist_G(u, v) ≤ D.
  */
 public class Forbidden {
 
@@ -16,7 +14,7 @@ public class Forbidden {
         int n = graph.length;
         boolean[][] forbidden = new boolean[n][n];
 
-        // BFS from every vertex to compute all reachable nodes within distance D
+        // Run a bounded BFS from each vertex to identify all vertices within distance D
         for (int start = 0; start < n; start++) {
 
             int[] dist = new int[n];
@@ -29,10 +27,11 @@ public class Forbidden {
             while (!q.isEmpty()) {
                 int u = q.poll();
 
-                // Do not explore beyond D levels
+                // We only care whether dist(start, u) ≤ D, so exploration stops at depth D
                 if (dist[u] == D) continue;
 
                 for (int v : graph[u]) {
+                	// If v has not been reached before, this first path via u gives its minimal distance dist[u] + 1
                     if (dist[v] == -1) {
                         dist[v] = dist[u] + 1;
                         q.add(v);
@@ -40,7 +39,7 @@ public class Forbidden {
                 }
             }
 
-            // Mark all vertices within D as forbidden pairs (u = start)
+            // Mark exactly those vertices whose shortest-path distance from start is ≤ D
             for (int v = 0; v < n; v++) {
                 if (dist[v] != -1 && dist[v] <= D)
                     forbidden[start][v] = true;

@@ -1,12 +1,11 @@
 package social_distancing.data;
 
 /**
- * Holds the complete result of the alternating BFS:
- * - k = minimal number of full steps (A-moves) needed to reach the goal
- * - dist[u][v][turn] = minimal half-step distance to (u, v, turn)
- * - pu, pv, pturn store parent pointers for path reconstruction.
+ * Stores the outcome of the alternating BFS.
+ * k is the minimum number of full steps needed to reach the targets.
+ * dist and parent pointers are used only to reconstruct the paths.
  *
- * If no valid solution exists within T, k = T+1 and dist = null.
+ * If no solution exists within T steps, k = T + 1 and all arrays are null.
  */
 public class Result {
 
@@ -16,9 +15,8 @@ public class Result {
     public final int[][][] pv;
     public final int[][][] pturn;
 
-    /**
-     * Successful BFS results.
-     */
+
+    // Successful BFS results.
     public Result(int k,
                   long[][][] dist,
                   int[][][] pu,
@@ -32,9 +30,7 @@ public class Result {
         this.pturn = pturn;
     }
 
-    /**
-     * Failure case
-     */
+    // Failure case
     private Result(int k) {
         this.k = k;
         this.dist = null;

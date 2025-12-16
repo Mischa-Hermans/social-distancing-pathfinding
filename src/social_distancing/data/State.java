@@ -1,13 +1,8 @@
 package social_distancing.data;
 
 /**
- * Represents a BFS state in the product space (u, v, turn):
- *
- * - u : position of player A
- * - v : position of player B
- * - turn : 0 if A moves next, 1 if B moves next
- *
- * This is used only to store queue elements during alternating BFS.
+ * State of the alternating BFS, consisting of the positions of both players
+ * and an indicator of whose turn it is to move next.
  */
 public class State {
 

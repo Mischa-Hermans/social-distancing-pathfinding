@@ -4,10 +4,8 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Represents a single problem instance:
- * - Graph adjacency list
- * - Start/target positions for A and B
- * - Time limit T and distance constraint D
+ * Stores all input data of a single problem instance:
+ * the graph, start and target vertices, and the parameters T and D.
  */
 public class Instance {
 
@@ -51,13 +49,13 @@ public class Instance {
         int sA = Integer.parseInt(st[0]) - 1;
         int tA = Integer.parseInt(st[1]) - 1;
         int sB = Integer.parseInt(st[2]) - 1;
-        int tB = Integer.parseInt(st[3]) - 1;
+        int tB = Integer.parseInt(st[3]) - 1;	
 
         // Validate number of edge lines
         if (lines.size() != 2 + m)
             throw new IOException("Expected " + m + " edge lines but got " + (lines.size() - 2));
 
-        // Build adjacency list using ArrayList
+        // Build the adjacency list
         ArrayList<Integer>[] tmp = new ArrayList[n];
         for (int i = 0; i < n; i++) tmp[i] = new ArrayList<>();
 

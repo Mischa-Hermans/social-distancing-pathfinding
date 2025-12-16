@@ -3,8 +3,8 @@ package social_distancing.data;
 import java.util.List;
 
 /**
- * Holds the final paths for players A and B.
- * Each list entry corresponds to a time step, after both players have moved.
+ * Stores the resulting paths of players A and B.
+ * Each entry represents their positions after one full time step.
  */
 public class Paths {
 
@@ -17,11 +17,9 @@ public class Paths {
     }
 
     public void printToConsole() {
-        // Path A
         for (int v : pathA) System.out.print((v + 1) + " ");
         System.out.println();
 
-        // Path B
         for (int v : pathB) System.out.print((v + 1) + " ");
         System.out.println();
     }
